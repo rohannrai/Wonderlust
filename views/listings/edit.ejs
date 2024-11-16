@@ -24,6 +24,11 @@
               <input name="Listings[price]" value="<%= listing.price  %>" type="number" class="form-control" required > 
               <div class="invalid-feedback">Please enter a valid price </div>
             </div>
+            <div class="mb-3 col-md-4">
+                <label for="State"> State: </label>
+              <input name="Listings[State]" value="<%= listing.State  %>" type="text" class="form-control" required > 
+              <div class="invalid-feedback">Please enter a valid State </div>
+            </div>
             <div class="mb-3 col-md-8">
                 <label for="location">Location: </label>
                 <input name="Listings[location]" value="<%= listing.location  %>" type="text" class="form-control" required> 

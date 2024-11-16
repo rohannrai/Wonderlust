@@ -15,7 +15,9 @@ const listingschema = new Schema({
     } ,
     price: Number,
     location: String,
+    State:String,
     country: String,
+    Filters:String,
     review:[
         {
             type: Schema.Types.ObjectId,
@@ -24,7 +26,8 @@ const listingschema = new Schema({
     ],
     owner:{
         type : Schema.Types.ObjectId,
-        ref:"User"}
+        ref:"User"},
+    
 })
 listingschema.post("findOneAndDelete" , async(listing)=> {
    if(listing){

@@ -9,16 +9,6 @@ body {
 .navbar{
     height: 5rem;
     background-color: white;
-    z-index: 1;
-}
-.tog{
-    height: 100vh;
-    background-color: rgba(234, 230, 230, 0.922);
-    padding: 40px;
-    line-height: 2;
-
-    
-    
 }
 
 .icon{

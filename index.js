@@ -137,7 +137,9 @@ const isreviewowner = async(req,res,next) =>{
      next();
 };
 
-
+app.get("/" , (req,res) =>{
+    res.redirect("/listings");
+})
 // index route 
 app.get("/listings", wrapasync(async (req,res) => {
     let alllistings = await Listing.find({});
