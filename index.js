@@ -39,7 +39,6 @@ app.set("views",path.join(__dirname, "views"));
 app.use(express.urlencoded({extended:true}));
 app.use(methodoverride("_method"));
 app.engine("ejs", ejsMate);
-app.use(express.static(path.join(__dirname , "public")));
 const store = Mongostore.create({
     mongoUrl: MONGO_URL,
     crypto:{
@@ -63,6 +62,7 @@ app.use(session({
         httpOnly : true
     }}
 ));
+app.use(express.static(path.join(__dirname , "public")));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
@@ -304,9 +304,6 @@ app.get("/logout" , (req,res,next) =>{
     console.log("sample chat was saved");
     res.send("sucessfully saved");
 })*/ 
-app.get("/" , (req,res) => {
-    res.send("hii, i am groot ")
-});
 
 app.all("*" , (req,res,next)=>{
     next(new Expresserror(404,"page not found!"));
