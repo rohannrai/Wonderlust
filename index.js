@@ -119,7 +119,7 @@ const saveredirecturl = (req,res,next) =>{
 const isowner = async(req,res,next) =>{
     let {id} = req.params;
     let listing = await Listing.findById(id)
-     if(!listing.owner._id.equals(res.locals.cuRuser._id)){
+     if(!listing.owner._id.equals(res.locals.curruser._id)){
          req.flash("error" , " You are not the owner of this listing");
          return res.redirect(`/listings/${id}`)
      }
@@ -129,7 +129,7 @@ const isowner = async(req,res,next) =>{
 const isreviewowner = async(req,res,next) =>{
     let {id, reviewid} = req.params;
     let Review = await review.findById(reviewid)
-     if(!Review.author._id.equals(res.locals.cuRuser._id)){
+     if(!Review.author._id.equals(res.locals.curruser._id)){
          req.flash("error" , " You are not the Author of this Review");
          return res.redirect(`/listings/${id}`)
      }
