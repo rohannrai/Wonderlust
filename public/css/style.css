@@ -36,9 +36,10 @@ body {
     height: 8rem;
     background-color: #ebebeb;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: space-evenly;
+    align-items: center ;
     
     }
 
