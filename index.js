@@ -214,6 +214,11 @@ app.delete("/listings/:id",loggedIn,isowner, wrapasync( async (req,res)=>{
     req.flash("success" ,  " Deleted successfully")
     res.redirect("/listings")
 }))
+app.get("/listingssearch" , async(req,res) =>{
+    let {city} = req.query
+    const list = await Listing.find({State : city})
+    res.render("./listings/search.ejs", {list})
+})
 // reviews 
 //Post route
 app.post("/listings/:id/reviews" ,loggedIn, validatereview, wrapasync(async (req,res)=>{
