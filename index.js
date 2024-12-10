@@ -62,6 +62,7 @@ app.use(session({
         httpOnly : true
     }}
 ));
+
 app.use(express.static(path.join(__dirname , "public")));
 app.use(flash());
 app.use(passport.initialize());
@@ -244,6 +245,13 @@ app.delete("/listings/:id/reviews/:reviewid",loggedIn,isreviewowner,wrapasync(as
     req.flash("success" , "Review Deleted successfully")
     res.redirect(`/listings/${id}`)
 }));
+
+app.get("/listings/:id/booknow" , async (req,res) =>{
+    let {id} = req.params;
+   let hotel =  await Listing.findById(id).populate("owner")
+   console.log(hotel)
+    res.render("./bookings/booknow.ejs" , {hotel})
+})
  /*app.get("/demouser" , async ( req,res) =>{
     let fakeuser = new User({
         email:"rohan@gmail.com",

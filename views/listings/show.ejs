@@ -18,10 +18,12 @@
             </div>
          </div>   
      </div>
-     <div class="btns">
-      <%if(curruser && curruser._id.equals( ! list.owner._id)){ %> 
-      <a href="/"class="btn btn-dark col-1 offset-3  edit-btn"> Book Now</a>
+     <%if(curruser && !curruser._id.equals(list.owner._id)){ %> 
+      <form action="/listings/<%= list._id %>/booknow">
+        <button class="btn btn-dark offset-3 edit-btn"> Book </button>
+      </form>
       <%}%>
+     <div class="btns">
      <%if(curruser && curruser._id.equals(list.owner._id)){ %> 
         <a href="/listings/<%= list._id %>/edit" class="btn btn-dark col-1  offset-3 edit-btn"> Edit </a> 
         <form method="post" action="/listings/<%= list._id%>/?_method=DELETE">
