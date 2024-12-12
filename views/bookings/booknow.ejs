@@ -1,34 +1,64 @@
-<% layout("./layouts/boilerplate.ejs")%> 
-<body> 
-   
-<div class="row">
-<div class="col-8 offset-2">
-     <h3> <%= hotel.title %> </h3>
-<form action="">
-    <div class="mb-3">
-        <div class="card card-show listing-card " >
-            <img src="<%= hotel.image.url %> " class="card-img-top show-img" alt="...">
-            <div class="card-body">
-                <p> Hotel owner : <%= hotel.owner.username %> </p>
-              </div></div>
-    </div>
-    <h6> Hello <%= curruser.username %> Welcome to our booking Page please select the date to book : </h6>
-    <div class="row">
-    <div class="mb-3  col-4 "> 
-        <label for="From" > From </label>
-        <input type="date" class="form-control" required> 
-    </div>
-    <div class="mb-3 col-4 ">
-        <label for="To" > To </label>
-        <input type="date" class="form-control" required> 
-    </div>
-</div>
-<h6> Price of the hotel : <%= hotel.price  %> </h6>
-<h6> additional taxes   : <%= 0.18 *  hotel.price  %></h6>
-<h6> total Price : <%= hotel.price + (0.18 * hotel.price) %></h6>
-<button class="btn btn-dark edit-btn"> Submit </button>
+<% layout("./layouts/boilerplate.ejs")%>
 
-</form>
-</div>
-</div>
-</body>
+    <body>
+
+        <div class="row">
+            <div class="col-8 offset-2">
+                <p><i> Hello <%= curruser.username %>, Welcome to our booking Page  </i>
+                </p>
+                <h3 class="mt-3">
+                    <%= hotel.title %>
+                </h3>
+                <form action="/submit" method="post">
+                    <div class="mb-3">
+                        <div class="card card-show listing-card ">
+                            <div class="card-body">
+                                <p> Hotel owner : <%= hotel.owner.username %>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box">
+                    <div class="mb-3">
+                        <label for="name">Name: </label>
+                        <input type="text" name="name" class="form-control" value="<%= curruser.username %>">
+                    </div>
+                    <div class="row">
+                        <div class="mb-3  col-4">
+                            <label for="Hotel"> Hotel : </label>
+                            <input type="text" name="hotel" class="form-control" value="<%= hotel.title%> ">
+                        </div>
+                        <div class="mb-3 col-4">
+                            <label for="owner">Owner: </label>
+                            <input type="text" name="owner" class="form-control" value="<%= hotel.owner.username %>">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3  col-4 ">
+                            <label for="From"> From </label>
+                            <input type="date" class="form-control" name="From" required>
+                        </div>
+                        <div class="mb-3 col-4 ">
+                            <label for="To"> To </label>
+                            <input type="date" class="form-control" name="To">
+                        </div>
+                    </div>
+                    <div class="mb-3 col-4">
+                        <label for="Payment" > Payment Mode</label>
+                        <select name="Payment" required class="form-control">
+                            <option value=""> Select Payment Option</option>
+                        <option value="Pay_at_hotel">Pay at Hotel</option>
+                    <option value="Online">Card/Upi</option>
+                </select>
+                <h6> Price of the hotel : <%= hotel.price %>
+                </h6>
+                <h6> Total Price after tax  : <%= hotel.price + (0.18 * hotel.price) %>
+                </h6>
+                    </div>
+                    <button class="btn btn-dark edit-btn"> Submit </button>
+
+                </form>
+            </div>
+            </div>
+        </div>
+    </body>
