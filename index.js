@@ -26,7 +26,7 @@ const upload = multer({  storage })
 const bodyParser = require('body-parser');
 const { google } = require('googleapis');
 
-const KEY_PATH = path.join(__dirname, '/credentials.json');
+const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS);
 const SPREADSHEET_ID = '1BeOQ5wIgOT08r-2eUZ6te8wHyo6f7qhn19cmBUo2rmk';
 const RANGE = 'Sheet1!A1:D1';
 
@@ -89,7 +89,7 @@ app.use((req,res,next) =>{
 });
 async function authenticate() {
     const auth = new google.auth.GoogleAuth({
-      keyFile: KEY_PATH,
+      credentials: credentials,
       scopes: ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive'],
     });
   
