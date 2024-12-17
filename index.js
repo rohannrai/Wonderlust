@@ -134,7 +134,7 @@ const validatereview = ( req, res, next) => {
     let {error} = reviewSchema.validate(req.body);
 if(error){
     let errMsg = error.details.map((el) => el.message ).join(",")
-    throw new Expresserror (404, errMsg )
+    throw new Expresserror (404 , errMsg )
  }else{
     next();
  }
@@ -195,7 +195,7 @@ app.get("/listings/new",loggedIn, (req,res)=>{
 })
 // new listing post route
 app.post("/listings"  , upload.single("Listings[image]"), wrapasync(async(req,res,next) => {
-let url =    req.file.path;
+let url = req.file.path;
 let filename = req.file.filename;
 const newlisting = new Listing(req.body.Listings);
  newlisting.owner = req.user._id;
@@ -236,7 +236,7 @@ app.get("/listings/:id/edit" , loggedIn,isowner, async (req,res)=>{
 app.put("/listings/:id",isowner, upload.single("Listings[image]") ,wrapasync(async (req,res) => {
     let {id} = req.params;
    let listing = await Listing.findById(id)
-    if(!listing.owner._id.equals(res.locals.cuRuser._id)){
+    if(!listing.owner._id.equals(res.locals.curruser._id)){
         req.flash("error" , "you dont have permission to edit this listing");
         return res.redirect(`/listings/${id}`)
     }
@@ -350,6 +350,12 @@ app.post('/submit', async (req, res) => {
    
   });
 
+app.get("/user" , async (req,res,next) =>{
+    let name = req.user.username;
+    const user = await User.findOne({ username: name });
+    const listings =  await Listing.find({ owner: user._id });
+    res.render("./Users/user.ejs" , {listings , user})
+})
 app.post("/login" ,saveredirecturl,  passport.authenticate( "local" , { 
     failureRedirect:"/login", 
     failureFlash: true
@@ -357,6 +363,8 @@ app.post("/login" ,saveredirecturl,  passport.authenticate( "local" , {
     req.flash("success", "welcome back to WonderLust!! You are Logged in !!");
     let redirecturl = res.locals.redirectUrl || "/listings"
     res.redirect(redirecturl);
+    console.log(req.user);
+
 });
 app.get("/logout" , (req,res,next) =>{
    req.logOut((err) =>{

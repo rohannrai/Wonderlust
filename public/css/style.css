@@ -114,3 +114,12 @@ body {
 .new{
     font-size:  25px;
 }
+
+@media screen and (max-width:768px ){
+    .show{
+         z-index: 100;
+         background-color: lightgrey;
+         height: 100vh;
+    };
+   
+}

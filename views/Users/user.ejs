@@ -1,0 +1,30 @@
+<% layout("./layouts/boilerplate.ejs")%> 
+<div class="mb-6 "> 
+  <h1> Hello  <%= user.username %> </h1>
+   <h6> Your Email : <%= user.email %> </h6>
+   <div>
+    <form> 
+        <button class="btn btn-dark edit-btn mb-3"> Edit Profile </button>
+    </form>
+   </div>
+</div>
+<hr class="mb-5 mt-6">      
+<h6> Your Posts: <h6> 
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 ">
+    <% for(listing of listings){ %>
+        <a href="/listings/<%= listing. _id%>" class="listing-links">
+        <div class="card col listing-card ">
+            <img src=<%= listing.image.url %> class="card-img-top" alt="..." style="height:20rem;">
+            <div class="card-img-overlay"></div>
+            <div class="card-body">
+              <p class="card-text">
+               <b>  <%= listing.title %></b>
+                <br>
+                 &#8377 <%=listing.price.toLocaleString("en-IN") %>/night
+              </p>
+    
+            </div>
+          </div>
+        </a>
+          <% } %>
+   </div>
